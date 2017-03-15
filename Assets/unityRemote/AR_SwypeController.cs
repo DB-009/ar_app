@@ -12,7 +12,8 @@ public class AR_SwypeController : MonoBehaviour {
 
     [SerializeField]
     public List<taps> currentTouches = new List<taps> { new taps(), new taps(), new taps(), new taps(), new taps(), new taps(), new taps(), new taps(), new taps(), new taps() };
-   
+
+    public bool inWalkableScene;
     // Use this for initialization
     void Start () {
         rb = this.GetComponent<Rigidbody>();
@@ -144,7 +145,7 @@ public class AR_SwypeController : MonoBehaviour {
 
 
 
-        if (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A))
+        if (Input.GetKey(KeyCode.A) || (Input.GetKey(KeyCode.LeftArrow)  && inWalkableScene == false))
         {
             
             rotX -= Time.deltaTime * camTurnForce * keyboardMultiplier;
@@ -152,7 +153,7 @@ public class AR_SwypeController : MonoBehaviour {
             this.transform.eulerAngles = new Vector3(rotY, rotX, 0);
 
         }
-        else if (Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D))
+        else if ( Input.GetKey(KeyCode.D) || (Input.GetKey(KeyCode.RightArrow) && inWalkableScene == false))
         {
 
             rotX += Time.deltaTime * camTurnForce * keyboardMultiplier;
@@ -161,7 +162,7 @@ public class AR_SwypeController : MonoBehaviour {
 
         }
 
-        if (Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.W))
+        if ( Input.GetKey(KeyCode.W)||  (Input.GetKey(KeyCode.UpArrow)&& inWalkableScene == false))
         {
 
             rotY -= Time.deltaTime * camTurnForce * keyboardMultiplier;
@@ -169,7 +170,7 @@ public class AR_SwypeController : MonoBehaviour {
             this.transform.eulerAngles = new Vector3(rotY, rotX, 0);
 
         }
-        else if (Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.S))
+        else if (Input.GetKey(KeyCode.S) || ( Input.GetKey(KeyCode.DownArrow) && inWalkableScene == false))
         {
 
              rotY += Time.deltaTime* camTurnForce * keyboardMultiplier;
