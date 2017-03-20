@@ -64,6 +64,9 @@ public class playerController : MonoBehaviour {
                     OnHold();
                     OnUp();
 
+
+                
+
                    // sidSpd = Input.GetAxis("Horizontal");//get controller based movement
                    // fwdSpd = Input.GetAxis("Vertical");//controller based movement
 
@@ -90,39 +93,60 @@ public class playerController : MonoBehaviour {
 
     }
 
+    public void IncreaseSpeed(bool vertical)
+    {
+        if(vertical == true)
+            {
+            fwdSpd = mvspd;
+             }
+        else
+        {
+            sidSpd = mvspd;
+        }
+    }
+
+    public void DecreaseSpeed(bool vertical)
+    {
+        if (vertical == true)
+        {
+            fwdSpd = mvspd*-1;
+        }
+        else
+        {
+            sidSpd = mvspd*-1;
+        }
+    }
 
 
-
-
-//on keys down update speed variables
+    //on keys down update speed variables
     public void OnDown()
     {
 
         if (Input.GetKeyDown(KeyCode.UpArrow))
         {
            
-                    fwdSpd = mvspd;
-            
+                   
+            IncreaseSpeed(true);
 
         }
         else if (Input.GetKeyDown(KeyCode.DownArrow))
         {
 
-                    fwdSpd = mvspd * -1;
-            
+            DecreaseSpeed(true);
+
 
         }
         if (Input.GetKeyDown(KeyCode.LeftArrow))
         {
-      
-                sidSpd = mvspd * -1;
+
+            DecreaseSpeed(false);
 
         }
         else if (Input.GetKeyDown(KeyCode.RightArrow))
         {
 
-    
-                sidSpd = mvspd;
+
+            IncreaseSpeed(false);
 
 
         }

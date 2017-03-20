@@ -16,6 +16,7 @@ public class CameraStreamTexture : MonoBehaviour
 
     public float distanceFromCamera;
 
+    public bool unityRemoteTest;
     private void Start()
     {
 
@@ -25,9 +26,18 @@ public class CameraStreamTexture : MonoBehaviour
         this.transform.localScale = new Vector3(width, height, 1);
 
         deviceCameras = WebCamTexture.devices;//set array of camera devices found
+
+        for(int i = 0; i < deviceCameras.Length;i++)
+        {
+            Debug.Log("found : " + deviceCameras[i].name);
+        }
+
+
+
         currentCam = 0;//set current camera to 0
-       
-         StartCamera();//start camera
+   
+        if(unityRemoteTest == false)
+        StartCamera();
     }
 
 
@@ -36,9 +46,21 @@ public class CameraStreamTexture : MonoBehaviour
     {
         if ( deviceCameras.Length > 0)
         {
-             cameraTexture = new WebCamTexture( deviceCameras[ currentCam].name,  streamWidth,  streamHeight);//crate new camera texture with our chosen camera and setting
-            
-             GetComponent<Renderer>().material.mainTexture = (Texture) cameraTexture;//chnge main texture on billboard object to camera texture
+
+            deviceCameras = WebCamTexture.devices;//set array of camera devices found
+
+            for (int i = 0; i < deviceCameras.Length; i++)
+            {
+                Debug.Log("found : " + deviceCameras[i].name);
+            }
+
+            cameraTexture = new WebCamTexture(streamWidth,streamHeight);//create new camera texture with our chosen width and height
+
+             cameraTexture.deviceName = deviceCameras[currentCam].name;//select current camera
+
+            //cameraTexture = new WebCamTexture( deviceCameras[ currentCam].name,  streamWidth,  streamHeight);//crate new camera texture with our chosen camera and setting
+
+            GetComponent<Renderer>().material.mainTexture = cameraTexture;//chnge main texture on billboard object to camera texture
              cameraTexture.Play();//play camera texture
         }
          cameraTexture.filterMode = FilterMode.Trilinear;//change filter mode to trileanear

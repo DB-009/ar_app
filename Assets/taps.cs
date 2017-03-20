@@ -4,6 +4,7 @@ using System.Collections;
 [System.Serializable]
 public class taps  {
 
+    public bool alive;
     public float id;
     public float time;
 	public Vector2 position;
@@ -19,12 +20,13 @@ public class taps  {
 	
 	}
 
-	public taps (float time, Vector2 position, Vector2 start_pos , float id)
+	public taps (float time, Vector2 position, Vector2 start_pos , float id , bool isAlive)
 	{
 		this.time = time;
 		this.position = position;
 		this.start_pos = start_pos;
 		this.id = id;
+        alive = isAlive;
 	}
 
 	public taps ()
